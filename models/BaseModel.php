@@ -7,7 +7,13 @@ class BaseModel
 	
 	function __construct()
 	{
-		$this->conn = new PDO('mysql:host=127.0.0.1;dbname=oop;charset=utf8', 'root', '');
+		$this->conn = new PDO('mysql:host=127.0.0.1;dbname=oop;charset=utf8', 'root', '123456');
+	}
+
+	public static function rawQuery($sqlQuery){
+		$model = new static();
+		$model->queryBuilder = $sqlQuery;
+		return $model;
 	}
 
 	public static function all(){
@@ -25,6 +31,16 @@ class BaseModel
  		return $model;
  	}
 
+ 	public function andWhere($arr){
+ 		$this->queryBuilder .= " and $arr[0] $arr[1] '$arr[2]'";
+ 		return $this;
+ 	}
+
+ 	public function orWhere($arr){
+ 		$this->queryBuilder .= " or $arr[0] $arr[1] '$arr[2]'";
+ 		return $this;
+ 	}
+
  	public function first(){
  		$stmt = $this->conn->prepare($this->queryBuilder);
 		$stmt->execute();
@@ -34,6 +50,14 @@ class BaseModel
 		}else{
 			return null;
 		}
+ 	}
+
+ 	public function get(){
+ 		$stmt = $this->conn->prepare($this->queryBuilder);
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_CLASS, get_class($this));
+		
+		return $result;
  	}
 }
 

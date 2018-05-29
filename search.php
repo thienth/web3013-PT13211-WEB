@@ -1,6 +1,6 @@
 <?php 
 require_once './models/Post.php';
-require_once './models/User.php';
+$keyword = $_GET['keyword'];
 
 $posts = Post::rawQuery("
 				select 
@@ -10,10 +10,11 @@ $posts = Post::rawQuery("
 				from posts p
 				join users u
 				on p.created_by = u.id
+				where title like '%$keyword%'
 				")
 				->get();
- ?>
 
+ ?>
 
  <!DOCTYPE html>
  <html>
@@ -28,10 +29,6 @@ $posts = Post::rawQuery("
  </head>
  <body>
  	<div class="container">
- 		<form action="search.php">
- 			<input type="text" name="keyword" placeholder="Tìm kiếm ...">
- 			<button type="submit">Tìm kiếm</button>
- 		</form>
  	<?php foreach ($posts as $item): ?>
  		<div>
  			<h2>
