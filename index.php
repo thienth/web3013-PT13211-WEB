@@ -1,21 +1,27 @@
 <?php 
-require_once './models/Post.php';
-require_once './models/User.php';
+// require_once './models/Post.php';
+// require_once './models/User.php';
 
-$posts = Post::rawQuery("
-				select 
-					p.*,
-					u.id as user_id,
-					u.email
-				from posts p
-				join users u
-				on p.created_by = u.id
-				")
-				->get();
+// $posts = Post::rawQuery("
+// 				select 
+// 					p.*,
+// 					u.id as user_id,
+// 					u.email
+// 				from posts p
+// 				join users u
+// 				on p.created_by = u.id
+// 				")
+// 				->get();
+require_once './controllers/HomeController.php';
+$ctr = new HomeController();
+$ctr->index();
+
+
+
  ?>
 
 
- <!DOCTYPE html>
+ <!-- <!DOCTYPE html>
  <html>
  <head>
  	<title></title>
@@ -48,4 +54,4 @@ $posts = Post::rawQuery("
  	<?php endforeach ?>
  	</div>
  </body>
- </html>
+ </html> -->
