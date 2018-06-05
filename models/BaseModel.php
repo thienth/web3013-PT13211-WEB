@@ -7,13 +7,18 @@ class BaseModel
 	
 	function __construct()
 	{
-		$this->conn = new PDO('mysql:host=127.0.0.1;dbname=oop;charset=utf8', 'root', '123456');
+		$this->conn = new PDO('mysql:host=127.0.0.1;dbname=oop;charset=utf8', 'root', '');
 	}
 
 	public static function rawQuery($sqlQuery){
 		$model = new static();
 		$model->queryBuilder = $sqlQuery;
 		return $model;
+	}
+
+	public function execute(){
+		$stmt = $this->conn->prepare($this->queryBuilder);
+		return $stmt->execute();
 	}
 
 	public static function all(){

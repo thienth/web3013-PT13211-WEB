@@ -2,18 +2,28 @@
  <html>
  <head>
  	<title></title>
- 	<style type="text/css">
- 		.container{
- 			width: 600px;
- 			margin: auto;
- 		}
- 	</style>
+ 	<link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
+ 	<link rel="stylesheet" type="text/css" href="public/css/main.css">
  </head>
  <body>
  	<div class="container">
+ 		<ul class="nav justify-content-end">
+ 			<li class="nav-item">
+ 				<a class="nav-link active" href="#">Active</a>
+ 			</li>
+ 			<li class="nav-item">
+ 				<a class="nav-link" href="#">Link</a>
+ 			</li>
+ 			<li class="nav-item">
+ 				<a class="nav-link" href="#">Link</a>
+ 			</li>
+ 			<li class="nav-item">
+ 				<a class="nav-link" href="add-new.php">Thêm bài viết</a>
+ 			</li>
+ 		</ul>
  		<form action="search.php">
  			<input type="text" name="keyword" placeholder="Tìm kiếm ...">
- 			<button type="submit">Tìm kiếm</button>
+ 			<button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
  		</form>
  	<?php 
 		require_once './controllers/HomeController.php';
@@ -22,5 +32,11 @@
 	 ?>
 
  	</div>
+
+ 	<script type="text/javascript" src="public/jquery/jquery.min.js"></script>
+ 	<script type="text/javascript" src="public/bootstrap/js/bootstrap.min.js"></script>
+ 	<script type="text/javascript" src="public/sweetalert/sweetalert.min.js"></script>
+ 	<script type="text/javascript" src="public/jquery-validation/jquery.validate.min.js"></script>
+ 	<script type="text/javascript" src="public/jquery-validation/additional-methods.js"></script>
  </body>
  </html>

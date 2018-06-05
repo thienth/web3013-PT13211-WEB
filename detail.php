@@ -23,7 +23,7 @@ $post = Post::where(['slug', '=', $slug])->first();
  		</p>
  		<img src="<?php echo $post->image ?>" width="400">
  		<p>
- 			<?php echo $post->content ?>
+ 			<?php echo htmlspecialchars_decode($post->content) ?>
  		</p>
  	</div>
  </body>
