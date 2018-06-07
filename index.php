@@ -1,3 +1,8 @@
+<?php 
+
+session_start();
+
+?>
  <!DOCTYPE html>
  <html>
  <head>
@@ -17,9 +22,11 @@
  			<li class="nav-item">
  				<a class="nav-link" href="#">Link</a>
  			</li>
- 			<li class="nav-item">
- 				<a class="nav-link" href="add-new.php">Thêm bài viết</a>
- 			</li>
+ 			<?php 
+ 				require_once './controllers/AuthController.php';
+ 				$ctr = new AuthController();
+ 				$ctr->headerAuth();
+ 			 ?> 			
  		</ul>
  		<form action="search.php">
  			<input type="text" name="keyword" placeholder="Tìm kiếm ...">
