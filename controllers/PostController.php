@@ -12,25 +12,20 @@ class PostController
 		$image = $_FILES['image'];
 		$short_desc = $_POST['short_desc'];
 		$content = $_POST['content'];
-		$imgUrl = "";
-
-		
 
 		if($image['size'] > 0){
 			$ext = pathinfo($image['name'], PATHINFO_EXTENSION);
 			$fileName = $slug. '-' . uniqid() . '.' . $ext;
 			move_uploaded_file($image['tmp_name'], 'public/uploads/'.$fileName);
-			$imgUrl = 'public/uploads/'.$fileName;
+			$image = 'public/uploads/'.$fileName;
+		}else{
+			$image = "";
 		}
 		
+		$model = new Post();
+		$model->insert(compact('title', 'slug', 'image', 'short_desc', 'content'));
 
-		Post::rawQuery("
-			insert into posts 
-				(title, slug, image, short_desc, content)
-			values
-				('$title', '$slug', '$imgUrl', '$short_desc', '$content')
-
-		")->execute();
+		
 
 		header('location: index.php');
 		

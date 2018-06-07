@@ -7,7 +7,33 @@ class BaseModel
 	
 	function __construct()
 	{
-		$this->conn = new PDO('mysql:host=127.0.0.1;dbname=oop;charset=utf8', 'root', '');
+		$this->conn = new PDO('mysql:host=127.0.0.1;dbname=oop;charset=utf8', 'root', '123456');
+	}
+
+	public function insert($arr){
+		$this->queryBuilder = "insert into $this->tableName ";
+		$cols = " (";
+		$vals = " (";
+		foreach ($arr as $key => $value) {
+			$cols .= " $key,";
+			$vals .= " :$key,";
+		}
+
+		$cols = rtrim($cols, ',');
+		$vals = rtrim($vals, ',');
+
+		$cols .= ") ";
+		$vals .= ") ";
+
+		$this->queryBuilder .= $cols . ' values ' . $vals;
+
+		$stmt = $this->conn
+					->prepare($this->queryBuilder);
+		foreach ($arr as $key => &$value) {
+			$stmt->bindParam(":$key", $value);
+		}
+		$stmt->execute();
+
 	}
 
 	public static function rawQuery($sqlQuery){
