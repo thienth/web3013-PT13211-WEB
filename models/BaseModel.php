@@ -36,6 +36,26 @@ class BaseModel
 
 	}
 
+	public function update($arr){
+		$this->queryBuilder = "update $this->tableName set ";
+		
+		foreach ($arr as $key => $value) {
+			$this->queryBuilder .= " $key = :$key,";
+		}
+
+		$this->queryBuilder = rtrim($this->queryBuilder, ',');
+		$this->queryBuilder .= " where id = :id";
+
+		$stmt = $this->conn
+					->prepare($this->queryBuilder);
+		foreach ($arr as $key => &$value) {
+			$stmt->bindParam(":$key", $value);
+		}
+		$stmt->bindParam(":id", $this->id);
+		$stmt->execute();
+	}
+
+
 	public static function rawQuery($sqlQuery){
 		$model = new static();
 		$model->queryBuilder = $sqlQuery;

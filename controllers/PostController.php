@@ -24,7 +24,8 @@ class PostController
 		
 		$model = new Post();
 		$model->insert(compact('title', 'slug', 'image', 'short_desc', 'content'));
-
+		
+		// $model->update(compact('title', 'slug', 'image', 'short_desc', 'content'));
 		
 
 		header('location: index.php');
