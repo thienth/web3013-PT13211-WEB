@@ -1,0 +1,19 @@
+{
+    "name": "ginv2/nsp",
+    "authors": [
+        {
+            "name": "thienth32",
+            "email": "thienth32@gmail.com"
+        }
+    ],
+   	"autoload": {
+        "psr-4": {
+    		"Php1\\": "php1/",
+    		"Php2\\": "php2"
+    	}
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.0",
+        "nesbot/carbon": "^1.30"
+    }
+}
