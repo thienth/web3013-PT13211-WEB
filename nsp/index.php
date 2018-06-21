@@ -1,11 +1,35 @@
 <?php
 require_once './vendor/autoload.php'; 
-use Php2\Amodel as A2;
-use Php1\Amodel;
 
-use Php1\Models\Pig;
+$url = isset($_GET['url']) == true ? $_GET['url'] : "/"; 
 
-$pg = new A2();
+use App\Controllers\HomeController;
+use App\Controllers\AdminController;
+switch ($url) {
+	case '/':
+		$ctr = new HomeController();
+		$ctr->index();
+		break;
+	case 'admin':
+		$ctr = new AdminController();
+		$ctr->dashboard();
+		break;
+	case 'login':
+		if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+			
+			$ctr = new HomeController();
+			$ctr->login();
+		}else{
 
+			$ctr = new HomeController();
+			$ctr->postLogin();
+		}
+		break;
+	
+	default:
+		# code...
+		break;
+}
 
  ?>
+ 

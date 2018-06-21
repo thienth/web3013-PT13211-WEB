@@ -8,8 +8,7 @@
     ],
    	"autoload": {
         "psr-4": {
-    		"Php1\\": "php1/",
-    		"Php2\\": "php2"
+    		"App\\": "app/"
     	}
     },
     "require": {
